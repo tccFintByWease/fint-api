@@ -37,4 +37,35 @@ module.exports = {
         });
     },
 
+    alterar: (idMoeda, descricaoMoeda) => {
+        try{
+            return new Promise((aceito, rejeitado) =>{
+                db.query('UPDATE tblMoeda SET descricaoMoeda = ? where idMoeda = ?', 
+                [descricaoMoeda, idMoeda], 
+                    (error, results) => {
+                        if(error){
+                            rejeitado(error);
+                            return; 
+                        }
+                        aceito(results);                
+                    }
+                );
+            });
+        } catch(error){            
+            console.log(error);
+        }        
+    },
+
+    deletar: (idMoeda) => {
+        try{
+            return new Promise((aceito, rejeitado)=>{
+                db.query('DELETE FROM tblMoeda WHERE idMoeda = ?', [idMoeda], (error, results)=>{
+                    if(error) { rejeitado(error); return; }
+                    aceito(results);                   
+                });
+            });
+        } catch(error){
+            console.log(error)
+        }        
+    },
 };
