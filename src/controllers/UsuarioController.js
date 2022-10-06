@@ -3,9 +3,9 @@ const UsuarioService = require('../services/UsuarioService');
 module.exports = {
 
     buscarTodos: async (req, res) => {
-        try {
-            let json = { error: '', result: [] };
+        let json = { error: '', result: [] };
 
+        try {
             let usuarios = await UsuarioService.buscarTodos();
 
             for (let i in usuarios) {
@@ -21,37 +21,44 @@ module.exports = {
                     dataCadastroUsuario: usuarios[i].dataCadastroUsuario
                 });
             }
+
+            if (!json) {
+                json.error = 'Nenhum registro encontrado!';
+            }
+
             res.json(json);
         } catch (error) {
+            json.error = error;
+            res.json(json);
             console.error(error);
         }
     },
 
     buscarUm: async (req, res) => {
-        try {
-            let json = { error: '', result: {} };
+        let json = { error: '', result: {} };
 
-            let idUsuario = req.params.idUsuario;
+        try {
+            let idUsuario = req.body.idUsuario;
             let usuario = await UsuarioService.buscarUm(idUsuario);
 
             if (usuario) {
                 json.result = usuario;
-            }
-            else{
-                json.result = "Falha ao realizar autentificação";
-
+            } else {
+                json.error = 'Nenhum registro encontrado com base nos parâmetros!';
             }
 
             res.json(json);
         } catch (error) {
-            console.log(error)
+            json.error = error;
+            res.json(json);
+            console.error(error);
         }
     },
 
     inserir: async (req, res) => {
-        try {
-            let json = { error: '', result: {} };
+        let json = { error: '', result: {} };
 
+        try {
             let idMoeda = req.body.idMoeda;
             let nomeUsuario = req.body.nomeUsuario;
             let emailUsuario = req.body.emailUsuario;
@@ -75,20 +82,22 @@ module.exports = {
                     dataCadastroUsuario
                 };
             } else {
-                json.error = 'Campos não enviados';
+                json.error = 'Campos não enviados!';
             }
 
             res.json(json);
         } catch (error) {
+            json.error = error;
+            res.json(json);
             console.log(error);
         }
     },
 
     alterar: async (req, res) => {
-        try {
-            let json = { error: '', result: {} };
+        let json = { error: '', result: {} };
 
-            let idUsuario = req.params.idUsuario;
+        try {
+            let idUsuario = req.body.idUsuario;
             let idMoeda = req.body.idMoeda;
             let nomeUsuario = req.body.nomeUsuario;
             let emailUsuario = req.body.emailUsuario;
@@ -112,25 +121,35 @@ module.exports = {
                     dataCadastroUsuario
                 };
             } else {
-                json.error = 'Campos não enviados';
+                json.error = 'Campos não enviados!';
             }
 
             res.json(json);
         } catch (error) {
+            json.error = error;
+            res.json(json);
             console.log(error);
         }
     },
 
-    excluir: async (req, res) => {
-        try {
-            let json = { error: '', result: {} };
+    deletar: async (req, res) => {
+        let json = { error: '', result: {} };
 
-            json.result = {
-                resultado: 1
-            };
+        try {
+            let idUsuario = req.body.idUsuario;
+
+            let i = await UsuarioService.deletar(idUsuario);
+
+            if (i > 0) {
+                json.result = 'Registro deletado com sucesso!';
+            } else {
+                json.error = 'Nenhum registro encontrado!'
+            }
 
             res.json(json);
         } catch (error) {
+            json.error = error;
+            res.json(json);
             console.log(error)
         }
     }

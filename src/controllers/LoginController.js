@@ -14,7 +14,7 @@ module.exports = {
                 json.result = usuario;
             }
             else{
-                json.result = 'Falha ao realizar autenticação!'
+                json.error = 'Falha ao realizar autenticação!'
             }
 
             res.json(json);
