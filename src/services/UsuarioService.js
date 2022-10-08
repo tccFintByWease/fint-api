@@ -5,7 +5,6 @@ module.exports = {
     buscarTodos: () => {
         try {
             return new Promise((aceito, rejeitado) => {
-
                 db.query('SELECT * FROM tblUsuario', (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);
@@ -57,7 +56,7 @@ module.exports = {
                     [idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario, idUsuario],
                     (error, results) => {
                         if (error) { rejeitado(error); return; }
-                        aceito(results);
+                        aceito(results);                        
                     }
                 );
             });
@@ -75,6 +74,24 @@ module.exports = {
                         return;
                     } else {
                         aceito(results.affectedRows);
+                    }
+                });
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    buscarUmPorEmail: (emailUsuario) => {
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('SELECT * FROM tblUsuario where emailUsuario = ?', [emailUsuario], (error, results) => {                
+                    if (error) { rejeitado(error); return; }
+                    if (results.length > 0) {
+                        aceito(results[0]);
+                    }
+                    else {
+                        aceito(false);
                     }
                 });
             });

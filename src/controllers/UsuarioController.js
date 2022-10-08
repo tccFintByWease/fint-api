@@ -1,3 +1,4 @@
+const { buscarUmPorEmail } = require('../services/UsuarioService');
 const UsuarioService = require('../services/UsuarioService');
 
 module.exports = {
@@ -44,7 +45,7 @@ module.exports = {
             if (usuario) {
                 json.result = usuario;
             } else {
-                json.error = 'Nenhum registro encontrado com base nos parâmetros!';
+                json.error = 'Nenhum registro encontrado!';
             }
 
             res.json(json);
@@ -108,18 +109,24 @@ module.exports = {
             let dataCadastroUsuario = req.body.dataCadastroUsuario;
 
             if (idUsuario && idMoeda && nomeUsuario && emailUsuario && senhaUsuario && cpfUsuario && foneUsuario && dataNascUsuario && dataCadastroUsuario) {
-                await UsuarioService.alterar(idUsuario, idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario);
-                json.result = {
-                    idUsuario,
-                    idMoeda,
-                    nomeUsuario,
-                    emailUsuario,
-                    senhaUsuario,
-                    cpfUsuario,
-                    foneUsuario,
-                    dataNascUsuario,
-                    dataCadastroUsuario
-                };
+                let i = await UsuarioService.alterar(idUsuario, idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario);
+                if (i.affectedRows > 0) {
+                    json.result = {
+                        idUsuario,
+                        idMoeda,
+                        nomeUsuario,
+                        emailUsuario,
+                        senhaUsuario,
+                        cpfUsuario,
+                        foneUsuario,
+                        dataNascUsuario,
+                        dataCadastroUsuario
+                    };
+                }
+                else {
+                    json.error = 'Nenhum registro encontrado!'
+                }
+
             } else {
                 json.error = 'Campos não enviados!';
             }
@@ -152,5 +159,27 @@ module.exports = {
             res.json(json);
             console.log(error)
         }
-    }
+    },
+
+    buscarUmPorEmail: async (req, res) => {
+        let json = { error: '', result: {} };
+
+        try {
+            let emailUsuario = req.body.emailUsuario;
+            
+            let usuario = await UsuarioService.buscarUmPorEmail(emailUsuario);
+
+            if (usuario) {
+                json.result = usuario;
+            } else {
+                json.error = 'Nenhum registro encontrado!';
+            }
+
+            res.json(json);
+        } catch (error) {
+            json.error = error;
+            res.json(json);
+            console.error(error);
+        }
+    },
 }
