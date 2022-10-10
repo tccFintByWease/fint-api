@@ -29,4 +29,37 @@ module.exports = {
         }
     },
 
+    inserirGraficoUsuario: (idUsuario, idGrafico) => {
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('INSERT INTO tblUsuarioGrafico (idGrafico, idUsuario) VALUES (?, ?)',
+                    [idGrafico, idUsuario],
+                    (error, results) => {
+                        if (error) { rejeitado(error); return; }
+                        console.log(results);
+                        aceito(results);
+                    }
+                );
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    deletarGraficoUsuario: (idUsuario, idGrafico) => {
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('DELETE FROM tblUsuarioGrafico WHERE idUsuario = ? and idGrafico = ?', [idUsuario, idGrafico], (error, results) => {
+                    if (error) {
+                        rejeitado(error);
+                        return;
+                    } else {
+                        aceito(results.affectedRows);
+                    }
+                });
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    },
 }
