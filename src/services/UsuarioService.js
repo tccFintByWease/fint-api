@@ -15,13 +15,13 @@ module.exports = {
         }
     },
 
-    buscarUm: (idUsuario) => {
+    buscarUmPorId: (idUsuario) => {
         try {
             return new Promise((aceito, rejeitado) => {
                 db.query('SELECT * FROM tblUsuario where idUsuario = ?', [idUsuario], (error, results) => {
                     if (error) { rejeitado(error); return; }
                     if (results.length > 0) {
-                        aceito(results[0]);
+                        aceito(results[0]);                        
                     }
                     else {
                         aceito(false);
@@ -40,7 +40,7 @@ module.exports = {
                     [idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario],
                     (error, results) => {
                         if (error) { rejeitado(error); return; }
-                        aceito(results.insertCodigo);
+                        aceito(results.insertId);
                     }
                 );
             });
@@ -86,6 +86,42 @@ module.exports = {
         try {
             return new Promise((aceito, rejeitado) => {
                 db.query('SELECT * FROM tblUsuario where emailUsuario = ?', [emailUsuario], (error, results) => {                
+                    if (error) { rejeitado(error); return; }
+                    if (results.length > 0) {
+                        aceito(results[0]);
+                    }
+                    else {
+                        aceito(false);
+                    }
+                });
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    buscarUmPorCPF: (cpfUsuario) => {
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('SELECT * FROM tblUsuario where cpfUsuario = ?', [cpfUsuario], (error, results) => {                
+                    if (error) { rejeitado(error); return; }
+                    if (results.length > 0) {
+                        aceito(results[0]);
+                    }
+                    else {
+                        aceito(false);
+                    }
+                });
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    buscarUmPorFone: (foneUsuario) => {
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('SELECT * FROM tblUsuario where foneUsuario = ?', [foneUsuario], (error, results) => {                
                     if (error) { rejeitado(error); return; }
                     if (results.length > 0) {
                         aceito(results[0]);

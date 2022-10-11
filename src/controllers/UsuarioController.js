@@ -23,10 +23,6 @@ module.exports = {
                 });
             }
 
-            if (!json) {
-                json.error = 'Nenhum registro encontrado!';
-            }
-
             res.json(json);
         } catch (error) {
             json.error = error;
@@ -35,17 +31,15 @@ module.exports = {
         }
     },
 
-    buscarUm: async (req, res) => {
+    buscarUmPorId: async (req, res) => {
         let json = { error: '', result: {} };
 
         try {
             let idUsuario = req.body.idUsuario;
-            let usuario = await UsuarioService.buscarUm(idUsuario);
+            let usuario = await UsuarioService.buscarUmPorId(idUsuario);
 
             if (usuario) {
                 json.result = usuario;
-            } else {
-                json.error = 'Nenhum registro encontrado!';
             }
 
             res.json(json);
@@ -71,6 +65,7 @@ module.exports = {
 
             if (idMoeda && nomeUsuario && emailUsuario && senhaUsuario && cpfUsuario && foneUsuario && dataNascUsuario && dataCadastroUsuario) {
                 let idUsuario = await UsuarioService.inserir(idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario);
+
                 json.result = {
                     idUsuario: idUsuario,
                     idMoeda,
@@ -82,15 +77,13 @@ module.exports = {
                     dataNascUsuario,
                     dataCadastroUsuario
                 };
-            } else {
-                json.error = 'Campos não enviados!';
             }
 
             res.json(json);
         } catch (error) {
             json.error = error;
             res.json(json);
-            console.log(error);
+            console.error(error);
         }
     },
 
@@ -123,12 +116,6 @@ module.exports = {
                         dataCadastroUsuario
                     };
                 }
-                else {
-                    json.error = 'Nenhum registro encontrado!'
-                }
-
-            } else {
-                json.error = 'Campos não enviados!';
             }
 
             res.json(json);
@@ -150,7 +137,7 @@ module.exports = {
             if (i > 0) {
                 json.result = 'Registro deletado com sucesso!';
             } else {
-                json.error = 'Nenhum registro encontrado!'
+                json.result = 'Nenhum registro encontrado!'
             }
 
             res.json(json);
@@ -171,8 +158,46 @@ module.exports = {
 
             if (usuario) {
                 json.result = usuario;
-            } else {
-                json.error = 'Nenhum registro encontrado!';
+            }
+
+            res.json(json);
+        } catch (error) {
+            json.error = error;
+            res.json(json);
+            console.error(error);
+        }
+    },
+
+    buscarUmPorCPF: async (req, res) => {
+        let json = { error: '', result: {} };
+
+        try {
+            let cpfUsuario = req.body.cpfUsuario;
+            
+            let usuario = await UsuarioService.buscarUmPorCPF(cpfUsuario);
+
+            if (usuario) {
+                json.result = usuario;
+            }
+
+            res.json(json);
+        } catch (error) {
+            json.error = error;
+            res.json(json);
+            console.error(error);
+        }
+    },
+
+    buscarUmPorFone: async (req, res) => {
+        let json = { error: '', result: {} };
+
+        try {
+            let foneUsuario = req.body.foneUsuario;
+            
+            let usuario = await UsuarioService.buscarUmPorFone(foneUsuario);
+
+            if (usuario) {
+                json.result = usuario;
             }
 
             res.json(json);

@@ -9,7 +9,7 @@ module.exports = {
                     [idUsuario, idTipoMovimentacao, idCategoria, idDetalheMovimentacao, observacaoMovimentacao, valorMovimentacao, dataMovimentacao],
                     (error, results) => {
                         if (error) { rejeitado(error); return; }
-                        aceito(results.insertCodigo);
+                        aceito(results);
                     }
                 );
             });

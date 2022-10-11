@@ -36,7 +36,6 @@ module.exports = {
                     [idGrafico, idUsuario],
                     (error, results) => {
                         if (error) { rejeitado(error); return; }
-                        console.log(results);
                         aceito(results);
                     }
                 );

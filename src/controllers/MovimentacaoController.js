@@ -25,8 +25,6 @@ module.exports = {
                     valorMovimentacao,
                     dataMovimentacao
                 };
-            } else {
-                json.error = 'Campos não enviados!';
             }
 
             res.json(json);

@@ -9,21 +9,21 @@ const MovimentacaoController = require('./controllers/MovimentacaoController');
 
 //Moeda
 router.get('/moeda/buscarTodos', MoedaController.buscarTodos);
-router.post('/moeda/buscarUm', MoedaController.buscarUm);
-router.post('/moeda/inserir', MoedaController.inserir);
-router.put('/moeda/alterar', MoedaController.alterar);
-router.delete('/moeda/deletar', MoedaController.deletar);
+router.post('/moeda/buscarUmPorId', MoedaController.buscarUmPorId);
+router.post('/moeda/buscarUmPorDescricao', MoedaController.buscarUmPorDescricao);
 
 //Usuário
 router.get('/usuario/buscarTodos', UsuarioController.buscarTodos);
-router.post('/usuario/buscarUm', UsuarioController.buscarUm);
+router.post('/usuario/buscarUmPorId', UsuarioController.buscarUmPorId);
 router.post('/usuario/buscarUmPorEmail', UsuarioController.buscarUmPorEmail);
+router.post('/usuario/buscarUmPorCPF', UsuarioController.buscarUmPorCPF);
+router.post('/usuario/buscarUmPorFone', UsuarioController.buscarUmPorFone);
 router.post('/usuario/inserir', UsuarioController.inserir);
 router.put('/usuario/alterar', UsuarioController.alterar);
 router.delete('/usuario/deletar', UsuarioController.deletar);
 
 //Login
-router.post('/login', LoginController.buscarLogin);
+router.post('/login/buscarLogin', LoginController.buscarLogin);
 
 //Gráfico
 router.get('/grafico/buscarTodos', GraficoController.buscarTodos);
