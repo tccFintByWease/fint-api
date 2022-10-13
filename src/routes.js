@@ -18,6 +18,10 @@ router.post('/usuario/buscarUmPorId', UsuarioController.buscarUmPorId);
 router.post('/usuario/buscarUmPorEmail', UsuarioController.buscarUmPorEmail);
 router.post('/usuario/buscarUmPorCPF', UsuarioController.buscarUmPorCPF);
 router.post('/usuario/buscarUmPorFone', UsuarioController.buscarUmPorFone);
+router.post('/usuario/verificarTipoUsuario', UsuarioController.verificarTipoUsuario);
+router.post('/usuario/inserirTipoUsuario', UsuarioController.inserirTipoUsuario);
+
+
 router.post('/usuario/inserir', UsuarioController.inserir);
 router.put('/usuario/alterar', UsuarioController.alterar);
 router.delete('/usuario/deletar', UsuarioController.deletar);

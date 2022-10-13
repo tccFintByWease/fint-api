@@ -207,4 +207,54 @@ module.exports = {
             console.error(error);
         }
     },
+
+    //--
+
+    inserirTipoUsuario: async (req, res) => {
+        let json = { error: '', result: {} };
+
+        try {
+            let idAssinatura = req.body.idAssinatura;
+            let idUsuario = req.body.idUsuario;
+            let descricaoTipoUsuario = req.body.descricaoTipoUsuario;
+            let dataMudancaTipoUsuario = req.body.dataMudancaTipoUsuario;
+            
+            if (idAssinatura && idUsuario && descricaoTipoUsuario && dataMudancaTipoUsuario) {
+                await UsuarioService.inserirTipoUsuario(idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario);
+
+                json.result = {
+                    idAssinatura,
+                    idUsuario,
+                    descricaoTipoUsuario,
+                    dataMudancaTipoUsuario
+                };
+            }
+
+            res.json(json);
+        } catch (error) {
+            json.error = error;
+            res.json(json);
+            console.error(error);
+        }
+    },
+
+    verificarTipoUsuario: async (req, res) => {
+        let json = { error: '', result: {} };
+
+        try {
+            let idUsuario = req.body.idUsuario;
+            
+            let tipoUsuario = await UsuarioService.verificarTipoUsuario(idUsuario);
+
+            if (tipoUsuario) {
+                json.result = tipoUsuario;
+            }
+
+            res.json(json);
+        } catch (error) {
+            json.error = error;
+            res.json(json);
+            console.error(error);
+        }
+    },
 }

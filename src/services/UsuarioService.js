@@ -135,4 +135,57 @@ module.exports = {
             console.log(error)
         }
     },
+
+    //--
+
+    inserirTipoUsuario: (idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario) => {
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('INSERT INTO tblTipoUsuario (idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario) VALUES (?, ?, ?, ?)',
+                    [idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario],
+                    (error, results) => {
+                        if (error) { rejeitado(error); return; }
+                        aceito(results);
+                    }
+                );
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    alterarTipoUsuario: (idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario) => {
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('UPDATE tblTipoUsuario SET idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario where idUsuario = ?',
+                    [idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario],
+                    (error, results) => {
+                        if (error) { rejeitado(error); return; }
+                        aceito(results);                        
+                    }
+                );
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    verificarTipoUsuario: (idUsuario) => {        
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('select * from tblTipoUsuario where idUsuario = ?', [idUsuario], (error, results) => {                
+                    if (error) { rejeitado(error); return; }
+                    if (results.length > 0) {
+                        aceito(results[0]);
+                    }
+                    else {
+                        aceito(false);
+                    }
+                });
+            });
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
 };
