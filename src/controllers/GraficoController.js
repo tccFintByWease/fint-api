@@ -15,10 +15,6 @@ module.exports = {
                 });
             }
 
-            if (!json) {
-                json.error = 'Nenhum registro encontrado!';
-            }
-
             res.json(json);
         } catch (error) {
             json.error = error;
@@ -36,10 +32,8 @@ module.exports = {
 
             if (grafico) {
                 json.result = grafico;
-            } else {
-                json.error = 'Nenhum registro encontrado!';
             }
-
+            
             res.json(json);
         } catch (error) {
             json.error = error;
@@ -62,11 +56,7 @@ module.exports = {
                         idUsuario,
                         idGrafico
                     };
-                } else {
-                    json.error = 'Erro ao inserir';
                 }
-            } else {
-                json.error = 'Campos não enviados!';
             }
 
             res.json(json);
@@ -88,10 +78,8 @@ module.exports = {
 
             if (i > 0) {
                 json.result = 'Registro deletado com sucesso!';
-            } else {
-                json.error = 'Nenhum registro encontrado!'
             }
-
+            
             res.json(json);
         } catch (error) {
             json.error = error;

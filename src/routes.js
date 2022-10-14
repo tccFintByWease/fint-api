@@ -6,6 +6,7 @@ const UsuarioController = require('./controllers/UsuarioController')
 const LoginController = require('./controllers/LoginController');
 const GraficoController = require('./controllers/GraficoController');
 const MovimentacaoController = require('./controllers/MovimentacaoController');
+const CategoriaController = require('./controllers/CategoriaController');
 
 //Moeda
 router.get('/moeda/buscarTodos', MoedaController.buscarTodos);
@@ -20,8 +21,7 @@ router.post('/usuario/buscarUmPorCPF', UsuarioController.buscarUmPorCPF);
 router.post('/usuario/buscarUmPorFone', UsuarioController.buscarUmPorFone);
 router.post('/usuario/verificarTipoUsuario', UsuarioController.verificarTipoUsuario);
 router.post('/usuario/inserirTipoUsuario', UsuarioController.inserirTipoUsuario);
-
-
+router.put('/usuario/alterarTipoUsuario', UsuarioController.alterarTipoUsuario);
 router.post('/usuario/inserir', UsuarioController.inserir);
 router.put('/usuario/alterar', UsuarioController.alterar);
 router.delete('/usuario/deletar', UsuarioController.deletar);
@@ -37,6 +37,14 @@ router.delete('/grafico/deletarGraficoUsuario', GraficoController.deletarGrafico
 
 //Movimentação
 router.post('/movimentacao/inserir', MovimentacaoController.inserir);
+
+//Categoria
+router.post('/categoria/buscarTodos', CategoriaController.buscarTodos);
+router.post('/categoria/buscarUmPorId', CategoriaController.buscarUmPorId);
+router.post('/categoria/inserir', CategoriaController.inserir);
+router.put('/categoria/alterar', CategoriaController.alterar);
+router.delete('/categoria/deletar', CategoriaController.deletar);
+router.get('/categoria/buscarTodosTipoMovimentacao', CategoriaController.buscarTodosTipoMovimentacao);
 
 
 module.exports = router;

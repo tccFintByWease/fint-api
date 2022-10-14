@@ -238,6 +238,35 @@ module.exports = {
         }
     },
 
+    alterarTipoUsuario: async (req, res) => {
+        let json = { error: '', result: {} };
+
+        try {
+            let idAssinatura = req.body.idAssinatura;
+            let idUsuario = req.body.idUsuario;
+            let descricaoTipoUsuario = req.body.descricaoTipoUsuario;
+            let dataMudancaTipoUsuario = req.body.dataMudancaTipoUsuario;
+            
+            if (idAssinatura && idUsuario && descricaoTipoUsuario && dataMudancaTipoUsuario) {
+                let i = await UsuarioService.alterarTipoUsuario(idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario);
+                if (i.affectedRows > 0) {
+                    json.result = {
+                        idAssinatura,
+                        idUsuario,
+                        descricaoTipoUsuario,
+                        dataMudancaTipoUsuario
+                    };
+                }
+            }
+
+            res.json(json);
+        } catch (error) {
+            json.error = error;
+            res.json(json);
+            console.log(error);
+        }
+    },
+
     verificarTipoUsuario: async (req, res) => {
         let json = { error: '', result: {} };
 

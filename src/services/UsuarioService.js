@@ -157,8 +157,8 @@ module.exports = {
     alterarTipoUsuario: (idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('UPDATE tblTipoUsuario SET idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario where idUsuario = ?',
-                    [idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario],
+                db.query('UPDATE tblTipoUsuario SET idAssinatura = ?, idUsuario = ?, descricaoTipoUsuario = ?, dataMudancaTipoUsuario = ? where idUsuario = ?',
+                    [idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario, idUsuario],
                     (error, results) => {
                         if (error) { rejeitado(error); return; }
                         aceito(results);                        
@@ -186,6 +186,5 @@ module.exports = {
         } catch (error) {
             console.log(error)
         }
-
     }
 };
