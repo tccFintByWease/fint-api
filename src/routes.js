@@ -37,6 +37,11 @@ router.delete('/grafico/deletarGraficoUsuario', GraficoController.deletarGrafico
 
 //Movimentação
 router.post('/movimentacao/inserir', MovimentacaoController.inserir);
+router.put('/movimentacao/alterar', MovimentacaoController.alterar);
+router.delete('/movimentacao/deletar', MovimentacaoController.deletar);
+router.post('/movimentacao/buscarTodasReceitas', MovimentacaoController.buscarTodasReceitas);
+router.post('/movimentacao/buscarTodasDespesas', MovimentacaoController.buscarTodasDespesas);
+router.post('/movimentacao/buscarUmPorId', MovimentacaoController.buscarUmPorId);
 
 //Categoria
 router.post('/categoria/buscarTodos', CategoriaController.buscarTodos);
