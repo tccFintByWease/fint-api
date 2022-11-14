@@ -160,8 +160,10 @@ module.exports = {
         try {
             let idUsuario = req.body.idUsuario;
             let idTipoMovimentacao = req.body.idTipoMovimentacao;
+            let dataInicial = req.body.dataInicial;
+            let dataFinal = req.body.dataFinal;
 
-            let registro = await CategoriaService.buscarRecorrenciaCategoriaMovimentacao(idUsuario, idTipoMovimentacao);
+            let registro = await CategoriaService.buscarRecorrenciaCategoriaMovimentacao(idUsuario, idTipoMovimentacao, dataInicial, dataFinal);
 
             for (let i in registro) {
                 json.result.push({

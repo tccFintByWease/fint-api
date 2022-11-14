@@ -95,11 +95,11 @@ module.exports = {
         }
     },
 
-    buscarRecorrenciaCategoriaMovimentacao: (idUsuario, idTipoMovimentacao) => {
+    buscarRecorrenciaCategoriaMovimentacao: (idUsuario, idTipoMovimentacao, dataInicial, dataFinal) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('SELECT M.idCategoria, COUNT(M.idCategoria) as recorrenciaCategoria, C.descricaoCategoria, C.corCategoria FROM tblMovimentacao as M inner join tblCategoria as C on M.idCategoria = C.idCategoria where M.idUsuario = ? and M.idTipoMovimentacao = ? group by idCategoria;',
-                [idUsuario, idTipoMovimentacao],
+                db.query('SELECT M.idCategoria, COUNT(M.idCategoria) as recorrenciaCategoria, C.descricaoCategoria, C.corCategoria FROM tblMovimentacao as M inner join tblCategoria as C on M.idCategoria = C.idCategoria where M.idUsuario = ? and M.idTipoMovimentacao = ? and M.dataMovimentacao BETWEEN ? AND ? group by idCategoria;',
+                [idUsuario, idTipoMovimentacao, dataInicial, dataFinal],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);                        
