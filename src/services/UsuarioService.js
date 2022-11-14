@@ -21,7 +21,7 @@ module.exports = {
                 db.query('SELECT * FROM tblUsuario where idUsuario = ?', [idUsuario], (error, results) => {
                     if (error) { rejeitado(error); return; }
                     if (results.length > 0) {
-                        aceito(results[0]);                        
+                        aceito(results[0]);
                     }
                     else {
                         aceito(false);
@@ -33,11 +33,11 @@ module.exports = {
         }
     },
 
-    inserir: (idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario) => {
+    inserir: (statusUsuario, idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('INSERT INTO tblUsuario (idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-                    [idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario],
+                db.query('INSERT INTO tblUsuario (statusUsuario, idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                    [statusUsuario, idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario],
                     (error, results) => {
                         if (error) { rejeitado(error); return; }
                         aceito(results.insertId);
@@ -49,14 +49,46 @@ module.exports = {
         }
     },
 
-    alterar: (idUsuario, idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario) => {
+    alterar: (idUsuario, statusUsuario, idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('UPDATE tblUsuario SET idMoeda = ?, nomeUsuario = ?, emailUsuario = ?, senhaUsuario = ?, cpfUsuario = ?, foneUsuario = ?, dataNascUsuario = ?, dataCadastroUsuario = ? where idUsuario = ?',
-                    [idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario, idUsuario],
+                db.query('UPDATE tblUsuario SET statusUsuario = ?, idMoeda = ?, nomeUsuario = ?, emailUsuario = ?, senhaUsuario = ?, cpfUsuario = ?, foneUsuario = ?, dataNascUsuario = ?, dataCadastroUsuario = ? where idUsuario = ?',
+                    [statusUsuario, idMoeda, nomeUsuario, emailUsuario, senhaUsuario, cpfUsuario, foneUsuario, dataNascUsuario, dataCadastroUsuario, idUsuario],
                     (error, results) => {
                         if (error) { rejeitado(error); return; }
-                        aceito(results);                        
+                        aceito(results);
+                    }
+                );
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    
+    alterarStatus: (statusUsuario, emailUsuario, senhaUsuario) => {
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('UPDATE tblUsuario SET statusUsuario = ? WHERE emailUsuario = ? AND senhaUsuario = ?',
+                    [statusUsuario, emailUsuario, senhaUsuario],
+                    (error, results) => {
+                        if (error) { rejeitado(error); return; }
+                        aceito(results);
+                    }
+                );
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    alterarSenha: (senhaUsuario, emailUsuario) => {
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('UPDATE tblUsuario SET senhaUsuario = ? WHERE emailUsuario = ?',
+                    [senhaUsuario, emailUsuario],
+                    (error, results) => {
+                        if (error) { rejeitado(error); return; }
+                        aceito(results);
                     }
                 );
             });
@@ -85,7 +117,7 @@ module.exports = {
     buscarUmPorEmail: (emailUsuario) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('SELECT * FROM tblUsuario where emailUsuario = ?', [emailUsuario], (error, results) => {                
+                db.query('SELECT * FROM tblUsuario where emailUsuario = ?', [emailUsuario], (error, results) => {
                     if (error) { rejeitado(error); return; }
                     if (results.length > 0) {
                         aceito(results[0]);
@@ -103,7 +135,7 @@ module.exports = {
     buscarUmPorCPF: (cpfUsuario) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('SELECT * FROM tblUsuario where cpfUsuario = ?', [cpfUsuario], (error, results) => {                
+                db.query('SELECT * FROM tblUsuario where cpfUsuario = ?', [cpfUsuario], (error, results) => {
                     if (error) { rejeitado(error); return; }
                     if (results.length > 0) {
                         aceito(results[0]);
@@ -121,7 +153,7 @@ module.exports = {
     buscarUmPorFone: (foneUsuario) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('SELECT * FROM tblUsuario where foneUsuario = ?', [foneUsuario], (error, results) => {                
+                db.query('SELECT * FROM tblUsuario where foneUsuario = ?', [foneUsuario], (error, results) => {
                     if (error) { rejeitado(error); return; }
                     if (results.length > 0) {
                         aceito(results[0]);
@@ -138,11 +170,11 @@ module.exports = {
 
     //--
 
-    inserirTipoUsuario: (idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario) => {
+    inserirTipoUsuario: (idAssinatura, idUsuario, dataMudancaTipoUsuario) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('INSERT INTO tblTipoUsuario (idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario) VALUES (?, ?, ?, ?)',
-                    [idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario],
+                db.query('INSERT INTO tblTipoUsuario (idAssinatura, idUsuario, dataMudancaTipoUsuario) VALUES (?, ?, ?)',
+                    [idAssinatura, idUsuario, dataMudancaTipoUsuario],
                     (error, results) => {
                         if (error) { rejeitado(error); return; }
                         aceito(results);
@@ -154,14 +186,14 @@ module.exports = {
         }
     },
 
-    alterarTipoUsuario: (idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario) => {
+    alterarTipoUsuario: (idAssinatura, idUsuario, dataMudancaTipoUsuario) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('UPDATE tblTipoUsuario SET idAssinatura = ?, idUsuario = ?, descricaoTipoUsuario = ?, dataMudancaTipoUsuario = ? where idUsuario = ?',
-                    [idAssinatura, idUsuario, descricaoTipoUsuario, dataMudancaTipoUsuario, idUsuario],
+                db.query('UPDATE tblTipoUsuario SET idAssinatura = ?, idUsuario = ?, dataMudancaTipoUsuario = ? where idUsuario = ?',
+                    [idAssinatura, dataMudancaTipoUsuario, idUsuario],
                     (error, results) => {
                         if (error) { rejeitado(error); return; }
-                        aceito(results);                        
+                        aceito(results);
                     }
                 );
             });
@@ -170,10 +202,10 @@ module.exports = {
         }
     },
 
-    verificarTipoUsuario: (idUsuario) => {        
+    verificarTipoUsuario: (idUsuario) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('select * from tblTipoUsuario where idUsuario = ?', [idUsuario], (error, results) => {                
+                db.query('select * from tblTipoUsuario where idUsuario = ?', [idUsuario], (error, results) => {
                     if (error) { rejeitado(error); return; }
                     if (results.length > 0) {
                         aceito(results[0]);

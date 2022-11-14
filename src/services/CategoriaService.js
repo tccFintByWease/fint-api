@@ -82,13 +82,28 @@ module.exports = {
         }
     },
 
-    buscarTodosTipoMovimentacao: () => {
+    buscarTodasCategorias: (idUsuario, idTipoMovimentacao) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('SELECT * FROM tblTipoMovimentacao', (error, results) => {
+                db.query('SELECT * FROM tblCategoria where idUsuario = ? and idTipoMovimentacao = ?', [idUsuario, idTipoMovimentacao], (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);
                 });
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    buscarRecorrenciaCategoriaMovimentacao: (idUsuario, idTipoMovimentacao) => {
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('SELECT M.idCategoria, COUNT(M.idCategoria) as recorrenciaCategoria, C.descricaoCategoria, C.corCategoria FROM tblMovimentacao as M inner join tblCategoria as C on M.idCategoria = C.idCategoria where M.idUsuario = ? and M.idTipoMovimentacao = ? group by idCategoria;',
+                [idUsuario, idTipoMovimentacao],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);                        
+                })
             });
         } catch (error) {
             console.log(error)

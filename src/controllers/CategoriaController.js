@@ -127,16 +127,22 @@ module.exports = {
         }
     },
 
-    buscarTodosTipoMovimentacao: async (req, res) => {
+    buscarTodasCategorias: async (req, res) => {
         let json = { error: '', result: [] };
 
         try {
-            let tipoMovimentacao = await CategoriaService.buscarTodosTipoMovimentacao();
+            let idUsuario = req.body.idUsuario;
+            let idTipoMovimentacao = req.body.idTipoMovimentacao;
 
-            for (let i in tipoMovimentacao) {
+            let categorias = await CategoriaService.buscarTodasCategorias(idUsuario, idTipoMovimentacao);
+
+            for (let i in categorias) {
                 json.result.push({
-                    idTipoMovimentacao: tipoMovimentacao[i].idTipoMovimentacao,
-                    descricaoTipoMovimentacao: tipoMovimentacao[i].descricaoTipoMovimentacao
+                    idCategoria: categorias[i].idCategoria,
+                    idUsuario: categorias[i].idUsuario,
+                    idTipoMovimentacao: categorias[i].idTipoMovimentacao,
+                    descricaoCategoria: categorias[i].descricaoCategoria,
+                    corCategoria: categorias[i].corCategoria
                 });
             }
 
@@ -147,4 +153,31 @@ module.exports = {
             console.error(error);
         }
     },
+
+    buscarRecorrenciaCategoriaMovimentacao: async (req, res) => {
+        let json = { error: '', result: [] };
+
+        try {
+            let idUsuario = req.body.idUsuario;
+            let idTipoMovimentacao = req.body.idTipoMovimentacao;
+
+            let registro = await CategoriaService.buscarRecorrenciaCategoriaMovimentacao(idUsuario, idTipoMovimentacao);
+
+            for (let i in registro) {
+                json.result.push({
+                    idCategoria: registro[i].idCategoria,
+                    recorrenciaCategoria: registro[i].recorrenciaCategoria,
+                    descricaoCategoria: registro[i].descricaoCategoria,
+                    corCategoria: registro[i].corCategoria,
+                });
+            }
+
+            res.json(json);
+        } catch (error) {
+            json.error = error;
+            res.json(json);
+            console.error(error);
+        }
+    },
+
 }

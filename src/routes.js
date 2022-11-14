@@ -24,6 +24,8 @@ router.post('/usuario/inserirTipoUsuario', UsuarioController.inserirTipoUsuario)
 router.put('/usuario/alterarTipoUsuario', UsuarioController.alterarTipoUsuario);
 router.post('/usuario/inserir', UsuarioController.inserir);
 router.put('/usuario/alterar', UsuarioController.alterar);
+router.put('/usuario/alterarStatus', UsuarioController.alterarStatus);
+router.put('/usuario/alterarSenha', UsuarioController.alterarSenha);
 router.delete('/usuario/deletar', UsuarioController.deletar);
 
 //Login
@@ -42,6 +44,7 @@ router.delete('/movimentacao/deletar', MovimentacaoController.deletar);
 router.post('/movimentacao/buscarTodasReceitas', MovimentacaoController.buscarTodasReceitas);
 router.post('/movimentacao/buscarTodasDespesas', MovimentacaoController.buscarTodasDespesas);
 router.post('/movimentacao/buscarUmPorId', MovimentacaoController.buscarUmPorId);
+router.post('/movimentacao/calcularDespesasReceitas', MovimentacaoController.calcularDespesasReceitas);
 
 //Categoria
 router.post('/categoria/buscarTodos', CategoriaController.buscarTodos);
@@ -49,7 +52,8 @@ router.post('/categoria/buscarUmPorId', CategoriaController.buscarUmPorId);
 router.post('/categoria/inserir', CategoriaController.inserir);
 router.put('/categoria/alterar', CategoriaController.alterar);
 router.delete('/categoria/deletar', CategoriaController.deletar);
-router.get('/categoria/buscarTodosTipoMovimentacao', CategoriaController.buscarTodosTipoMovimentacao);
+router.post('/categoria/buscarTodasCategorias', CategoriaController.buscarTodasCategorias);
+router.post('/categoria/buscarRecorrenciaCategoriaMovimentacao', CategoriaController.buscarRecorrenciaCategoriaMovimentacao);
 
 
 module.exports = router;
