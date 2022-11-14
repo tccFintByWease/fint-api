@@ -68,7 +68,7 @@ module.exports = {
     buscarTodasDespesas: (dataInicial, dataFinal, idUsuario) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('SELECT * FROM tblMovimentacao WHERE idUsuario = ? and idTipoMovimentacao = 1 and dataMovimentacao BETWEEN ? AND ? ORDER BY idMovimentacao DESC', [idUsuario, dataInicial, dataFinal], (error, results) => {
+                db.query('SELECT * FROM tblMovimentacao WHERE idUsuario = ? and idTipoMovimentacao = 2 and dataMovimentacao BETWEEN ? AND ? ORDER BY idMovimentacao DESC', [idUsuario, dataInicial, dataFinal], (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);
 
