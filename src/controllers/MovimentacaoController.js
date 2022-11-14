@@ -114,7 +114,7 @@ module.exports = {
                     idTipoMovimentacao: movimentacoes[i].idTipoMovimentacao,
                     idCategoria: movimentacoes[i].idCategoria,
                     idDetalheMovimentacao: movimentacoes[i].idDetalheMovimentacao,
-                    detalheMovimentacao: movimentacoes[i].detalheMovimentacao,
+                    descricaoMovimentacao: movimentacoes[i].descricaoMovimentacao,
                     observacaoMovimentacao: movimentacoes[i].observacaoMovimentacao,
                     valorMovimentacao: movimentacoes[i].valorMovimentacao,
                     dataMovimentacao: movimentacoes[i].dataMovimentacao
@@ -150,7 +150,7 @@ module.exports = {
                     idTipoMovimentacao: movimentacoes[i].idTipoMovimentacao,
                     idCategoria: movimentacoes[i].idCategoria,
                     idDetalheMovimentacao: movimentacoes[i].idDetalheMovimentacao,
-                    detalheMovimentacao: movimentacoes[i].detalheMovimentacao,
+                    descricaoMovimentacao: movimentacoes[i].descricaoMovimentacao,
                     observacaoMovimentacao: movimentacoes[i].observacaoMovimentacao,
                     valorMovimentacao: movimentacoes[i].valorMovimentacao,
                     dataMovimentacao: movimentacoes[i].dataMovimentacao
