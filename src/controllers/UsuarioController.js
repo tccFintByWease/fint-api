@@ -1,4 +1,3 @@
-const { buscarUmPorEmail } = require('../services/UsuarioService');
 const UsuarioService = require('../services/UsuarioService');
 
 module.exports = {

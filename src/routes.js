@@ -7,6 +7,7 @@ const LoginController = require('./controllers/LoginController');
 const GraficoController = require('./controllers/GraficoController');
 const MovimentacaoController = require('./controllers/MovimentacaoController');
 const CategoriaController = require('./controllers/CategoriaController');
+const SimulacaoController = require('./controllers/SimulacaoController');
 
 //Moeda
 router.get('/moeda/buscarTodos', MoedaController.buscarTodos);
@@ -54,6 +55,13 @@ router.put('/categoria/alterar', CategoriaController.alterar);
 router.delete('/categoria/deletar', CategoriaController.deletar);
 router.post('/categoria/buscarTodasCategorias', CategoriaController.buscarTodasCategorias);
 router.post('/categoria/buscarRecorrenciaCategoriaMovimentacao', CategoriaController.buscarRecorrenciaCategoriaMovimentacao);
+
+//Simulacao
+router.post('/simulacao/buscarUmPorId', SimulacaoController.buscarUmPorId);
+router.post('/simulacao/buscarTodasSimulacoesUsuario', SimulacaoController.buscarTodasSimulacoesUsuario);
+router.post('/simulacao/inserir', SimulacaoController.inserir);
+router.put('/simulacao/alterar', SimulacaoController.alterar);
+router.delete('/simulacao/deletar', SimulacaoController.deletar);
 
 
 module.exports = router;
