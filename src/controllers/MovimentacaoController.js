@@ -13,9 +13,10 @@ module.exports = {
             let observacaoMovimentacao = req.body.observacaoMovimentacao;
             let valorMovimentacao = req.body.valorMovimentacao;
             let dataMovimentacao = req.body.dataMovimentacao;
+            let statusMovimentacao = req.body.statusMovimentacao;
    
-            if (idUsuario && idTipoMovimentacao && idCategoria && idDetalheMovimentacao && descricaoMovimentacao && observacaoMovimentacao && valorMovimentacao && dataMovimentacao) {
-                let idMovimentacao = await MovimentacaoService.inserir(idUsuario, idTipoMovimentacao, idCategoria, idDetalheMovimentacao, descricaoMovimentacao, observacaoMovimentacao, valorMovimentacao, dataMovimentacao);
+            if (idUsuario && idTipoMovimentacao && idCategoria && idDetalheMovimentacao && descricaoMovimentacao && observacaoMovimentacao && valorMovimentacao && dataMovimentacao && statusMovimentacao) {
+                let idMovimentacao = await MovimentacaoService.inserir(idUsuario, idTipoMovimentacao, idCategoria, idDetalheMovimentacao, descricaoMovimentacao, observacaoMovimentacao, valorMovimentacao, dataMovimentacao, statusMovimentacao);
                 json.result = {
                     idMovimentacao: idMovimentacao,
                     idUsuario,
@@ -25,7 +26,8 @@ module.exports = {
                     descricaoMovimentacao,
                     observacaoMovimentacao,
                     valorMovimentacao,
-                    dataMovimentacao
+                    dataMovimentacao,
+                    statusMovimentacao
                 };
             }
 
@@ -50,9 +52,10 @@ module.exports = {
             let observacaoMovimentacao = req.body.observacaoMovimentacao;
             let valorMovimentacao = req.body.valorMovimentacao;
             let dataMovimentacao = req.body.dataMovimentacao;
+            let statusMovimentacao = req.body.statusMovimentacao;
 
-            if (idMovimentacao && idUsuario && idTipoMovimentacao && idCategoria && idDetalheMovimentacao && descricaoMovimentacao && observacaoMovimentacao && valorMovimentacao && dataMovimentacao) {
-                let i = await MovimentacaoService.alterar(idUsuario, idTipoMovimentacao, idCategoria, idDetalheMovimentacao, descricaoMovimentacao, observacaoMovimentacao, valorMovimentacao, dataMovimentacao, idMovimentacao);
+            if (idMovimentacao && idUsuario && idTipoMovimentacao && idCategoria && idDetalheMovimentacao && descricaoMovimentacao && observacaoMovimentacao && valorMovimentacao && dataMovimentacao && statusMovimentacao) {
+                let i = await MovimentacaoService.alterar(idUsuario, idTipoMovimentacao, idCategoria, idDetalheMovimentacao, descricaoMovimentacao, observacaoMovimentacao, valorMovimentacao, dataMovimentacao, idMovimentacao, statusMovimentacao);
                 if (i.affectedRows > 0) {
                     json.result = {
                         idMovimentacao,
@@ -63,7 +66,8 @@ module.exports = {
                         descricaoMovimentacao,
                         observacaoMovimentacao,
                         valorMovimentacao,
-                        dataMovimentacao
+                        dataMovimentacao,
+                        statusMovimentacao
                     };
                 }
             }
@@ -117,7 +121,8 @@ module.exports = {
                     descricaoMovimentacao: movimentacoes[i].descricaoMovimentacao,
                     observacaoMovimentacao: movimentacoes[i].observacaoMovimentacao,
                     valorMovimentacao: movimentacoes[i].valorMovimentacao,
-                    dataMovimentacao: movimentacoes[i].dataMovimentacao
+                    dataMovimentacao: movimentacoes[i].dataMovimentacao,
+                    statusMovimentacao: movimentacoes[i].statusMovimentacao
                 });
             }
 
@@ -153,7 +158,8 @@ module.exports = {
                     descricaoMovimentacao: movimentacoes[i].descricaoMovimentacao,
                     observacaoMovimentacao: movimentacoes[i].observacaoMovimentacao,
                     valorMovimentacao: movimentacoes[i].valorMovimentacao,
-                    dataMovimentacao: movimentacoes[i].dataMovimentacao
+                    dataMovimentacao: movimentacoes[i].dataMovimentacao,
+                    statusMovimentacao: movimentacoes[i].statusMovimentacao
                 });
             }
 
@@ -196,7 +202,6 @@ module.exports = {
                     idTipoMovimentacao: registro[i].idTipoMovimentacao,
                     descricaoTipoMovimentacao: registro[i].descricaoTipoMovimentacao,
                     somaMovimentacao: registro[i].somaMovimentacao,
-                    
                 });
             }
 

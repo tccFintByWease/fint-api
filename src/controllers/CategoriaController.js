@@ -14,7 +14,8 @@ module.exports = {
                     idUsuario: categoria[i].idUsuario,
                     idTipoMovimentacao: categoria[i].idTipoMovimentacao,
                     descricaoCategoria: categoria[i].descricaoCategoria,                    
-                    corCategoria: categoria[i].corCategoria
+                    corCategoria: categoria[i].corCategoria,
+                    statusCategoria: categoria[i].statusCategoria
                 });
             }
 
@@ -53,16 +54,18 @@ module.exports = {
             let idTipoMovimentacao = req.body.idTipoMovimentacao;
             let descricaoCategoria = req.body.descricaoCategoria;
             let corCategoria = req.body.corCategoria;            
+            let statusCategoria = req.body.statusCategoria;     
 
-            if (idUsuario && idTipoMovimentacao && descricaoCategoria && corCategoria) {
-                let idCategoria = await CategoriaService.inserir(idUsuario, idTipoMovimentacao, descricaoCategoria, corCategoria);
+            if (idUsuario && idTipoMovimentacao && descricaoCategoria && corCategoria && statusCategoria) {
+                let idCategoria = await CategoriaService.inserir(idUsuario, idTipoMovimentacao, descricaoCategoria, corCategoria, statusCategoria);
 
                 json.result = {
                     idCategoria: idCategoria,
                     idUsuario,
                     idTipoMovimentacao,
                     descricaoCategoria,
-                    corCategoria
+                    corCategoria,
+                    statusCategoria
                 };
             }
 
@@ -82,17 +85,19 @@ module.exports = {
             let idUsuario = req.body.idUsuario;
             let idTipoMovimentacao = req.body.idTipoMovimentacao;
             let descricaoCategoria = req.body.descricaoCategoria;
-            let corCategoria = req.body.corCategoria;        
+            let corCategoria = req.body.corCategoria;     
+            let statusCategoria = req.body.statusCategoria;        
 
-            if (idCategoria && idUsuario && idTipoMovimentacao && descricaoCategoria && corCategoria) {
-                let i = await CategoriaService.alterar(idCategoria, idUsuario, idTipoMovimentacao, descricaoCategoria, corCategoria);
+            if (idCategoria && idUsuario && idTipoMovimentacao && descricaoCategoria && corCategoria && statusCategoria) {
+                let i = await CategoriaService.alterar(idCategoria, idUsuario, idTipoMovimentacao, descricaoCategoria, corCategoria, statusCategoria);
                 if (i.affectedRows > 0) {
                     json.result = {
                         idCategoria,
                         idUsuario,
                         idTipoMovimentacao,
                         descricaoCategoria,
-                        corCategoria
+                        corCategoria,
+                        statusCategoria
                     };
                 }
             }
@@ -142,7 +147,8 @@ module.exports = {
                     idUsuario: categorias[i].idUsuario,
                     idTipoMovimentacao: categorias[i].idTipoMovimentacao,
                     descricaoCategoria: categorias[i].descricaoCategoria,
-                    corCategoria: categorias[i].corCategoria
+                    corCategoria: categorias[i].corCategoria,
+                    statusCategoria: categorias[i].statusCategoria
                 });
             }
 
@@ -171,6 +177,7 @@ module.exports = {
                     recorrenciaCategoria: registro[i].recorrenciaCategoria,
                     descricaoCategoria: registro[i].descricaoCategoria,
                     corCategoria: registro[i].corCategoria,
+                    statusCategoria: categorias[i].statusCategoria
                 });
             }
 
