@@ -20,11 +20,11 @@ module.exports = {
         }
     },
 
-    inserir: (idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, dataInicialSimulacao, dataFinalSimulacao) => {
+    inserir: (idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, taxaJurosSimulacao, dataInicialSimulacao, dataFinalSimulacao) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('INSERT INTO tblSimulacao (idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, dataInicialSimulacao, dataFinalSimulacao) VALUES (?, ?, ?, ?, ?, ?)',
-                    [idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, dataInicialSimulacao, dataFinalSimulacao],
+                db.query('INSERT INTO tblSimulacao (idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, taxaJurosSimulacao, dataInicialSimulacao, dataFinalSimulacao) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                    [idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, taxaJurosSimulacao, dataInicialSimulacao, dataFinalSimulacao],
                     (error, results) => {
                         if (error) { rejeitado(error); return; }
                         aceito(results.insertId);
@@ -36,11 +36,11 @@ module.exports = {
         }
     },
 
-    alterar: (idSimulacao, idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, dataInicialSimulacao, dataFinalSimulacao) => {
+    alterar: (idSimulacao, idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, taxaJurosSimulacao,dataInicialSimulacao, dataFinalSimulacao) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query('UPDATE tblSimulacao SET idUsuario = ?, descricaoSimulacao = ?, valorInicialSimulacao = ?, taxaCorretagemSimulacao = ?, dataInicialSimulacao = ?, dataFinalSimulacao = ? where idSimulacao = ?',
-                    [idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, dataInicialSimulacao, dataFinalSimulacao, idSimulacao],
+                db.query('UPDATE tblSimulacao SET idUsuario = ?, descricaoSimulacao = ?, valorInicialSimulacao = ?, taxaCorretagemSimulacao = ?, taxaJurosSimulacao = ?, dataInicialSimulacao = ?, dataFinalSimulacao = ? where idSimulacao = ?',
+                    [idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, taxaJurosSimulacao, dataInicialSimulacao, dataFinalSimulacao, idSimulacao],
                     (error, results) => {
                         if (error) { rejeitado(error); return; }
                         aceito(results);

@@ -15,6 +15,7 @@ module.exports = {
                     descricaoSimulacao: simulacao[i].descricaoSimulacao,
                     valorInicialSimulacao: simulacao[i].valorInicialSimulacao,
                     taxaCorretagemSimulacao: simulacao[i].taxaCorretagemSimulacao,
+                    taxaJurosSimulacao: simulacao[i].taxaJurosSimulacao,
                     dataInicialSimulacao: simulacao[i].dataInicialSimulacao,
                     dataFinalSimulacao: simulacao[i].dataFinalSimulacao,
                 });
@@ -35,11 +36,12 @@ module.exports = {
             let descricaoSimulacao = req.body.descricaoSimulacao;
             let valorInicialSimulacao = req.body.valorInicialSimulacao;
             let taxaCorretagemSimulacao = req.body.taxaCorretagemSimulacao;
+            let taxaJurosSimulacao = req.body.taxaJurosSimulacao;
             let dataInicialSimulacao = req.body.dataInicialSimulacao;
             let dataFinalSimulacao = req.body.dataFinalSimulacao;
 
-            if (idUsuario && descricaoSimulacao && valorInicialSimulacao && taxaCorretagemSimulacao && dataInicialSimulacao && dataFinalSimulacao) {
-                let idSimulacao = await SimulacaoService.inserir(idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, dataInicialSimulacao, dataFinalSimulacao);
+            if (idUsuario && descricaoSimulacao && valorInicialSimulacao && taxaCorretagemSimulacao && taxaJurosSimulacao && dataInicialSimulacao && dataFinalSimulacao) {
+                let idSimulacao = await SimulacaoService.inserir(idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, taxaJurosSimulacao, dataInicialSimulacao, dataFinalSimulacao);
 
                 json.result = {
                     idSimulacao: idSimulacao,
@@ -47,6 +49,7 @@ module.exports = {
                     descricaoSimulacao,
                     valorInicialSimulacao,
                     taxaCorretagemSimulacao,
+                    taxaJurosSimulacao,
                     dataInicialSimulacao,
                     dataFinalSimulacao
                 };
@@ -70,11 +73,12 @@ module.exports = {
             let descricaoSimulacao = req.body.descricaoSimulacao;
             let valorInicialSimulacao = req.body.valorInicialSimulacao;
             let taxaCorretagemSimulacao = req.body.taxaCorretagemSimulacao;
+            let taxaJurosSimulacao = req.body.taxaJurosSimulacao;
             let dataInicialSimulacao = req.body.dataInicialSimulacao;
             let dataFinalSimulacao = req.body.dataFinalSimulacao;
 
-            if (idSimulacao && idUsuario && descricaoSimulacao && valorInicialSimulacao && taxaCorretagemSimulacao && dataInicialSimulacao && dataFinalSimulacao) {
-                let i = await SimulacaoService.alterar(idSimulacao, idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, dataInicialSimulacao, dataFinalSimulacao);
+            if (idSimulacao && idUsuario && descricaoSimulacao && valorInicialSimulacao && taxaCorretagemSimulacao && taxaJurosSimulacao && dataInicialSimulacao && dataFinalSimulacao) {
+                let i = await SimulacaoService.alterar(idSimulacao, idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, taxaJurosSimulacao, dataInicialSimulacao, dataFinalSimulacao);
                 if (i.affectedRows > 0) {
                     json.result = {
                         idSimulacao,
@@ -82,6 +86,7 @@ module.exports = {
                         descricaoSimulacao,
                         valorInicialSimulacao,
                         taxaCorretagemSimulacao,
+                        taxaJurosSimulacao,
                         dataInicialSimulacao,
                         dataFinalSimulacao
                     };
