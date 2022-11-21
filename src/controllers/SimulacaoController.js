@@ -13,8 +13,8 @@ module.exports = {
                     idSimulacao: simulacao[i].idSimulacao,
                     idUsuario: simulacao[i].idUsuario,
                     descricaoSimulacao: simulacao[i].descricaoSimulacao,
-                    valorInicialSimulacao: simulacao[i].valorInicialSimulacao,
-                    taxaCorretagemSimulacao: simulacao[i].taxaCorretagemSimulacao,
+                    investimentoInicialSimulacao: simulacao[i].investimentoInicialSimulacao,
+                    investimentoMensalSimulacao: simulacao[i].investimentoMensalSimulacao,
                     taxaJurosSimulacao: simulacao[i].taxaJurosSimulacao,
                     dataInicialSimulacao: simulacao[i].dataInicialSimulacao,
                     dataFinalSimulacao: simulacao[i].dataFinalSimulacao,
@@ -34,21 +34,21 @@ module.exports = {
         try {
             let idUsuario = req.body.idUsuario;
             let descricaoSimulacao = req.body.descricaoSimulacao;
-            let valorInicialSimulacao = req.body.valorInicialSimulacao;
-            let taxaCorretagemSimulacao = req.body.taxaCorretagemSimulacao;
+            let investimentoInicialSimulacao = req.body.investimentoInicialSimulacao;
+            let investimentoMensalSimulacao = req.body.investimentoMensalSimulacao;
             let taxaJurosSimulacao = req.body.taxaJurosSimulacao;
             let dataInicialSimulacao = req.body.dataInicialSimulacao;
             let dataFinalSimulacao = req.body.dataFinalSimulacao;
 
-            if (idUsuario && descricaoSimulacao && valorInicialSimulacao && taxaCorretagemSimulacao && taxaJurosSimulacao && dataInicialSimulacao && dataFinalSimulacao) {
-                let idSimulacao = await SimulacaoService.inserir(idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, taxaJurosSimulacao, dataInicialSimulacao, dataFinalSimulacao);
+            if (idUsuario && descricaoSimulacao && investimentoInicialSimulacao && investimentoMensalSimulacao && taxaJurosSimulacao && dataInicialSimulacao && dataFinalSimulacao) {
+                let idSimulacao = await SimulacaoService.inserir(idUsuario, descricaoSimulacao, investimentoInicialSimulacao, investimentoMensalSimulacao, taxaJurosSimulacao, dataInicialSimulacao, dataFinalSimulacao);
 
                 json.result = {
                     idSimulacao: idSimulacao,
                     idUsuario,
                     descricaoSimulacao,
-                    valorInicialSimulacao,
-                    taxaCorretagemSimulacao,
+                    investimentoInicialSimulacao,
+                    investimentoMensalSimulacao,
                     taxaJurosSimulacao,
                     dataInicialSimulacao,
                     dataFinalSimulacao
@@ -71,21 +71,21 @@ module.exports = {
             let idSimulacao = req.body.idSimulacao;
             let idUsuario = req.body.idUsuario;
             let descricaoSimulacao = req.body.descricaoSimulacao;
-            let valorInicialSimulacao = req.body.valorInicialSimulacao;
-            let taxaCorretagemSimulacao = req.body.taxaCorretagemSimulacao;
+            let investimentoInicialSimulacao = req.body.investimentoInicialSimulacao;
+            let investimentoMensalSimulacao = req.body.investimentoMensalSimulacao;
             let taxaJurosSimulacao = req.body.taxaJurosSimulacao;
             let dataInicialSimulacao = req.body.dataInicialSimulacao;
             let dataFinalSimulacao = req.body.dataFinalSimulacao;
 
-            if (idSimulacao && idUsuario && descricaoSimulacao && valorInicialSimulacao && taxaCorretagemSimulacao && taxaJurosSimulacao && dataInicialSimulacao && dataFinalSimulacao) {
-                let i = await SimulacaoService.alterar(idSimulacao, idUsuario, descricaoSimulacao, valorInicialSimulacao, taxaCorretagemSimulacao, taxaJurosSimulacao, dataInicialSimulacao, dataFinalSimulacao);
+            if (idSimulacao && idUsuario && descricaoSimulacao && investimentoInicialSimulacao && investimentoMensalSimulacao && taxaJurosSimulacao && dataInicialSimulacao && dataFinalSimulacao) {
+                let i = await SimulacaoService.alterar(idSimulacao, idUsuario, descricaoSimulacao, investimentoInicialSimulacao, investimentoMensalSimulacao, taxaJurosSimulacao, dataInicialSimulacao, dataFinalSimulacao);
                 if (i.affectedRows > 0) {
                     json.result = {
                         idSimulacao,
                         idUsuario,
                         descricaoSimulacao,
-                        valorInicialSimulacao,
-                        taxaCorretagemSimulacao,
+                        investimentoInicialSimulacao,
+                        investimentoMensalSimulacao,
                         taxaJurosSimulacao,
                         dataInicialSimulacao,
                         dataFinalSimulacao
