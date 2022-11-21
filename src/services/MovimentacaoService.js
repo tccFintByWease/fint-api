@@ -100,7 +100,7 @@ module.exports = {
     calcularDespesasReceitas: (idUsuario) => {
         try {
             return new Promise((aceito, rejeitado) => {
-                db.query("SELECT M.idTipoMovimentacao, TM.descricaoTipoMovimentacao, SUM(M.valorMovimentacao) as somaMovimentacao FROM tblMovimentacao as M INNER JOIN tblTipoMovimentacao as TM on TM.idTipoMovimentacao = M.idTipomovimentacao WHERE idUsuario = ? and and statusMovimentacao = 'ativo' GROUP BY M.idTipoMovimentacao", [idUsuario], (error, results) => {
+                db.query("SELECT M.idTipoMovimentacao, TM.descricaoTipoMovimentacao, SUM(M.valorMovimentacao) as somaMovimentacao FROM tblMovimentacao as M INNER JOIN tblTipoMovimentacao as TM on TM.idTipoMovimentacao = M.idTipomovimentacao WHERE idUsuario = ? and statusMovimentacao = 'ativo' GROUP BY M.idTipoMovimentacao", [idUsuario], (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);
 
