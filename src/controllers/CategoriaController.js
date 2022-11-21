@@ -177,7 +177,7 @@ module.exports = {
                     recorrenciaCategoria: registro[i].recorrenciaCategoria,
                     descricaoCategoria: registro[i].descricaoCategoria,
                     corCategoria: registro[i].corCategoria,
-                    statusCategoria: categorias[i].statusCategoria
+                    statusCategoria: registro[i].statusCategoria
                 });
             }
 
