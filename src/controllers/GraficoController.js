@@ -87,4 +87,42 @@ module.exports = {
             console.log(error)
         }
     },
+
+    buscarReceitasPorMes: async (req, res) => {
+        let json = { error: '', result: {} };
+
+        try {
+            let idUsuario = req.body.idUsuario;
+            let grafico = await GraficoService.buscarReceitasPorMes(idUsuario);
+
+            if (grafico) {
+                json.result = grafico;
+            }
+            
+            res.json(json);
+        } catch (error) {
+            json.error = error;
+            res.json(json);
+            console.error(error);
+        }
+    },
+
+    buscarDespesasPorMes: async (req, res) => {
+        let json = { error: '', result: {} };
+
+        try {
+            let idUsuario = req.body.idUsuario;
+            let grafico = await GraficoService.buscarDespesasPorMes(idUsuario);
+
+            if (grafico) {
+                json.result = grafico;
+            }
+            
+            res.json(json);
+        } catch (error) {
+            json.error = error;
+            res.json(json);
+            console.error(error);
+        }
+    },
 }

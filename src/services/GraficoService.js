@@ -61,4 +61,32 @@ module.exports = {
             console.log(error)
         }
     },
+
+    buscarReceitasPorMes: (idUsuario) => {
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('SELECT SUM(valorMovimentacao) as somaMovimentacao, MONTH(dataMovimentacao) as mesMovimentacao FROM tblMovimentacao WHERE idUsuario = ? and idTipoMovimentacao = 1 GROUP BY MONTH(dataMovimentacao);',
+                [idUsuario], (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                });
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    buscarDespesasPorMes: (idUsuario) => {
+        try {
+            return new Promise((aceito, rejeitado) => {
+                db.query('SELECT SUM(valorMovimentacao) as somaMovimentacao, MONTH(dataMovimentacao) as mesMovimentacao FROM tblMovimentacao WHERE idUsuario = ? and idTipoMovimentacao = 2 GROUP BY MONTH(dataMovimentacao);',
+                [idUsuario], (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                });
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    },
 }

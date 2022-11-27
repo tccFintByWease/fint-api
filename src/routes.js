@@ -38,6 +38,8 @@ router.get('/grafico/buscarTodos', GraficoController.buscarTodos);
 router.post('/grafico/buscarGraficoUsuario', GraficoController.buscarGraficoUsuario);
 router.post('/grafico/inserirGraficoUsuario', GraficoController.inserirGraficoUsuario);
 router.delete('/grafico/deletarGraficoUsuario', GraficoController.deletarGraficoUsuario);
+router.post('/grafico/buscarDespesasPorMes', GraficoController.buscarDespesasPorMes);
+router.post('/grafico/buscarReceitasPorMes', GraficoController.buscarReceitasPorMes);
 
 //Movimentação
 router.post('/movimentacao/inserir', MovimentacaoController.inserir);
